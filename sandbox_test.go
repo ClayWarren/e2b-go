@@ -32,7 +32,9 @@ func echo(a *assert.Assertions) func(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			return
 		}
-		defer c.Close()
+		defer func() {
+			_ = c.Close()
+		}()
 		for {
 			mt, message, err := c.ReadMessage()
 			if err != nil {
@@ -130,7 +132,7 @@ func TestNewSandbox(t *testing.T) {
 	id := "test-sandbox-id"
 
 	// Create mock API server
-	apiServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	apiServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write(encode(&Sandbox{ID: id}))

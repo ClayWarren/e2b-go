@@ -2,6 +2,8 @@
 
 Go SDK for [E2B](https://e2b.dev/) - Cloud runtime for AI agents.
 
+Inspired by [the official TS/Python client](https://github.com/e2b-dev/code-interpreter)
+
 ## Installation
 
 ```bash
