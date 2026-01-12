@@ -228,3 +228,8 @@ func (s *Sandbox) Stop(ctx context.Context) error {
 func (s *Sandbox) Close(ctx context.Context) error {
 	return s.Stop(ctx)
 }
+
+// GetHost returns the host address for the specified port.
+func (s *Sandbox) GetHost(port int) string {
+	return fmt.Sprintf("%d-%s-%s.e2b.dev", port, s.ID, s.ClientID)
+}
